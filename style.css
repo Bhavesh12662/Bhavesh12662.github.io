@@ -1,0 +1,503 @@
+/* ================= GOOGLE FONTS ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ================= VARIABLES ================= */
+:root {
+    --accent-color: #4a90e2;
+    --primary-font: 'Poppins', sans-serif;
+
+    /* Light Mode */
+    --bg-color-light: #f4f5f7;
+    --text-color-light: #333333;
+    --card-bg-light: #ffffff;
+    --secondary-text-light: #555555;
+    --border-color-light: #dddddd;
+
+    /* Dark Mode */
+    --bg-color-dark: #121212;
+    --text-color-dark: #e0e0e0;
+    --card-bg-dark: #1e1e1e;
+    --secondary-text-dark: #bbbbbb;
+    --border-color-dark: #333333;
+}
+
+/* ================= BASE STYLES ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--primary-font);
+    transition: background-color 0.4s, color 0.4s;
+}
+
+body.light-mode {
+    background-color: var(--bg-color-light); /* Main light background */
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--bg-color-dark); /* Main dark background */
+    color: var(--text-color-dark);
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    z-index: 100;
+    transition: background-color 0.4s, box-shadow 0.4s;
+}
+
+.navbar.scrolled {
+    background-color: #e3e8f0; /* Custom light mode navbar color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .navbar.scrolled {
+    background-color: #2c3e50; /* Custom dark mode navbar color */
+}
+
+.nav__container {
+    max-width: 968px;
+    height: 4rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-color-light);
+    text-decoration: none;
+}
+
+body.dark-mode .nav__logo {
+    color: var(--text-color-dark);
+}
+
+.nav__list {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.nav__link {
+    text-decoration: none;
+    color: var(--secondary-text-light);
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+body.dark-mode .nav__link {
+    color: var(--secondary-text-dark);
+}
+
+.nav__link:hover {
+    color: var(--accent-color);
+}
+
+.nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav__link.active-link {
+    color: var(--accent-color);
+}
+
+.nav__link.active-link::after {
+    transform: scaleX(1);
+}
+
+.nav__toggle {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.nav__theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-text-light);
+    transition: color 0.3s;
+}
+
+body.dark-mode .nav__theme-toggle {
+    color: var(--secondary-text-dark);
+}
+
+.nav__theme-toggle:hover {
+    color: var(--accent-color);
+}
+
+/* CSS logic for showing/hiding the correct toggle icon */
+.nav__theme-toggle .fa-toggle-on {
+    display: none;
+}
+
+body.dark-mode .nav__theme-toggle .fa-toggle-off {
+    display: none;
+}
+
+body.dark-mode .nav__theme-toggle .fa-toggle-on {
+    display: block;
+}
+
+
+/* ================= SECTION STYLING ================= */
+.section {
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.section-inner {
+    max-width: 968px;
+    margin: 0 auto;
+}
+
+.section--bg-card {
+    background-color: var(--card-bg-light);
+}
+
+body.dark-mode .section--bg-card {
+    background-color: var(--card-bg-dark);
+}
+
+.section__title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section__subtitle {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: var(--secondary-text-light);
+}
+
+body.dark-mode .section__subtitle {
+    color: var(--secondary-text-dark);
+}
+
+.button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.3s;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.button--primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.button--secondary {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #2c3e50 0%, #243b55 100%);
+}
+
+.hero__title {
+    font-size: 3.5rem;
+}
+
+.hero__subtitle {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.hero__description {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.hero__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ================= ABOUT SECTION LAYOUT ================= */
+.about__container {
+    display: grid;
+    align-items: center;
+    gap: 2rem;
+}
+
+.about__image {
+    justify-self: center; /* Center the image container in the grid cell */
+}
+
+.about__image img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    /*box-shadow: 
+        0 0 0 4px var(--accent-color),
+        0 0 5px 8px rgba(0,0,0,0.2);*/
+}
+
+body.dark-mode .about__image img {
+    border-color: var(--card-bg-dark);
+}
+
+.about__text p {
+    line-height: 1.8;
+    text-align: left; /* Keep text left-aligned on desktop */
+}
+
+/* ================= PROJECT SPOTLIGHT ================= */
+.spotlight__container {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    text-align: center;
+}
+
+.spotlight__img {
+    max-width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+}
+
+.spotlight__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.spotlight__title {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.spotlight__description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.spotlight__feature h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.spotlight__feature i {
+    color: var(--accent-color);
+}
+
+.button.button--flex {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ================= SKILLS SECTION ================= */
+#skills .skills__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+#skills .skills__category {
+    background-color: var(--card-bg-light);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode #skills .skills__category {
+    background-color: var(--card-bg-dark);
+}
+
+.skills__category-title {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.skills__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.skill__item {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+/* ================= CONTACT SECTION ================= */
+#contact p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+    text-align: center;
+}
+
+#contact .button i {
+    margin-left: 0.5rem;
+}
+
+/* ================= SOCIAL LINKS (for Contact & Footer) ================= */
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer__social,
+.contact__social {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.contact__social {
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.social-link {
+    font-size: 1.5rem;
+    color: var(--secondary-text-light);
+    transition: color 0.3s, transform 0.3s;
+}
+
+body.dark-mode .social-link {
+    color: var(--secondary-text-dark);
+}
+
+.social-link:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ================= RESPONSIVENESS ================= */
+@media screen and (min-width: 768px) {
+    .about__container {
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+    }
+    .spotlight__container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav__menu {
+        position: fixed;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        padding: 4rem 0;
+        background-color: var(--card-bg-light);
+        transition: top 0.4s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode .nav__menu {
+        background-color: var(--card-bg-dark);
+    }
+
+    .nav__list {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav__toggle {
+        display: block;
+    }
+
+    .nav__menu.show-menu {
+        top: 4rem;
+    }
+
+    .hero__title {
+        font-size: 2.5rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .about__text p {
+        text-align: center; /* Center text on mobile */
+    }
+}
